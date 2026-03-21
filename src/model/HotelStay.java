@@ -3,9 +3,36 @@ package model;
 import java.math.BigDecimal;
 
 public class HotelStay extends TourService  {
-    int stars;
-    int nights;
+    private int stars;
+    private int nights;
     RoomType roomType;
+    public HotelStay(){
+        super();
+    }
+    public String toString() {
+        return "User{Сколько звезд=\"" + stars + "\", Сколько ночей=\"" + nights + "\", Тип комнаты=\"" + (roomType != null ? roomType.name() : "null") + "\", Name=\"" + getName() + "\", From=\"" + getFrom() + "\", To=\"" + getTo() + "\", Price=\"" + getPrice() + "\"}";
+    }
+    public HotelStay(int stars, int nights,BigDecimal price,LocalDate from,LocalDate to){
+        super(price,from,to);
+        this.stars = stars;
+        this.nights = nights;
+        this.roomType=roomType;
+    }
+    public void setStars(int stars){
+        this.stars = stars;
+    }
+    public int getStars(){
+        return stars;
+    }
+    public void setNights(int nights){
+        this.nights = nights;
+    }
+    public int getNights(){
+        return nights;
+    }
+    public void setRoomtype(RoomType roomType){this.roomType = roomType;}
+    public RoomType getRoomType(){return roomType;}
+
 
 
     @Override

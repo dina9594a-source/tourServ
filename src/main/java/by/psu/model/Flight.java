@@ -1,4 +1,4 @@
-package model;
+package by.psu.model;
 
 import java.math.BigDecimal;
 
@@ -7,11 +7,9 @@ public class Flight extends TourService {
     private String destination;
     private String flightNumber;
     private boolean baggageIncluded;
-    public Flight(){
-        super();
-    }
-    public Flight(BigDecimal price,LocalDate from,LocalDate to,String  origin,String destination,String flightNumber,boolean baggageIncluded){
-        super(price,from,to);
+
+    public Flight(String name,BigDecimal price,LocalDate from,LocalDate to,String  origin,String destination,String flightNumber,boolean baggageIncluded){
+        super(name, price,from,to);
         this.origin=origin;
         this.destination=destination;
         this.flightNumber=flightNumber;

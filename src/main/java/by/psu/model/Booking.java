@@ -1,5 +1,6 @@
-package model;
+package by.psu.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class Booking {
             }
             if (service instanceof HotelStay) {
                 HotelStay hotel = (HotelStay) service;
-                int maxParticipants = getMaxParticipantsForRoomType(hotel.getRoomType());
+                int maxParticipants = getMaxParticipantsForRoomType(hotel.getRoomType().toString());
                 if (participants > maxParticipants) {
                     throw new TourServiceValidationException(
                             String.format("Для номера типа %s максимальное количество участников: %d",
@@ -110,7 +111,7 @@ public class Booking {
         }
         if (service instanceof HotelStay) {
             HotelStay hotel = (HotelStay) service;
-            int maxParticipants = getMaxParticipantsForRoomType(hotel.getRoomType());
+            int maxParticipants = getMaxParticipantsForRoomType(hotel.getRoomType().toString());
             if (participants > maxParticipants) {
                 throw new TourServiceValidationException(
                         String.format("Для номера типа %s максимальное количество участников: %d",
@@ -156,7 +157,7 @@ public class Booking {
         }
         if (service instanceof HotelStay) {
             HotelStay hotel = (HotelStay) service;
-            int maxParticipants = getMaxParticipantsForRoomType(hotel.getRoomType());
+            int maxParticipants = getMaxParticipantsForRoomType(hotel.getRoomType().toString());
             if (participants > maxParticipants) {
                 throw new TourServiceValidationException(
                         String.format("Для номера типа %s максимальное количество участников: %d",
@@ -168,14 +169,27 @@ public class Booking {
     }
 
     public double calculateTotalPrice() {
-        double totalPrice = 0.0;
+        BigDecimal totalPrice = BigDecimal.ZERO;  // ← изменили тип на BigDecimal
+
         for (Map.Entry<TourService, Integer> entry : serviceParticipants.entrySet()) {
             TourService service = entry.getKey();
             int participants = entry.getValue();
-            totalPrice += service.getPrice() * participants;
+
+
+            totalPrice = totalPrice.add(
+                    service.getPrice().multiply(BigDecimal.valueOf(participants))
+            );
         }
-        double discount = client.getDiscountRate().doubleValue() / 100.0;
-        return totalPrice * (1 - discount);
+
+
+        BigDecimal discount = totalPrice.multiply(
+                client.getDiscountRate().divide(BigDecimal.valueOf(100))
+        );
+
+        totalPrice = totalPrice.subtract(discount);
+
+
+        return totalPrice.doubleValue();
     }
 
     public void confirm() {

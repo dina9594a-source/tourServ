@@ -1,4 +1,4 @@
-package model;
+package by.psu.model;
 
 import java.math.BigDecimal;
 
@@ -6,9 +6,7 @@ public class HotelStay extends TourService  {
     private int stars;
     private int nights;
     RoomType roomType;
-    public HotelStay(){
-        super();
-    }
+
     public String toString() {
         return "User{Сколько звезд=\"" + stars + "\", Сколько ночей=\"" + nights + "\", Тип комнаты=\"" + (roomType != null ? roomType.name() : "null") + "\", Name=\"" + getName() + "\", From=\"" + getFrom() + "\", To=\"" + getTo() + "\", Price=\"" + getPrice() + "\"}";
     }

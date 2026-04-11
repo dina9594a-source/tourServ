@@ -1,4 +1,4 @@
-package model;
+package by.psu.model;
 
 public class LocalDate {
     public boolean isAfter(LocalDate date) {

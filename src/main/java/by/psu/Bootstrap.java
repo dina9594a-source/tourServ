@@ -7,10 +7,17 @@ import by.psu.model.Excursion;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Main {
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Bootstrap {
 
     public static void main(String[] args) {
-        try (var connectionManager = new ConnectionManager()) {
+
+        SpringApplication.run(Bootstrap.class, args);
+
+        /*try (var connectionManager = new ConnectionManager()) {
             // get connection, print metadata
             var connection = connectionManager.getConnection();
             var metadata = connection.getMetaData();
@@ -44,7 +51,7 @@ public class Main {
             connection.commit();
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
 
         /*var hotelStay = new HotelStay();

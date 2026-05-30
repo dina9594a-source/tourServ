@@ -9,7 +9,7 @@ spring:
     virtual:
       enabled: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/tour-service
+    url: jdbc:postgresql://postgres:5432/tour-service
     username: admin
     password: admin
     driver-class-name: org.postgresql.Driver
